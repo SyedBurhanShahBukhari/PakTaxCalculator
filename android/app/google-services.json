@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "674833002497",
+    "project_id": "pakistantaxcalculator",
+    "storage_bucket": "pakistantaxcalculator.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:674833002497:android:9d49c1367d1874f6f5d000",
+        "android_client_info": {
+          "package_name": "com.example.paktaxcalculator_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDXk6CKAplm2UL0lv6nNAQG26PV-kVlOE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
