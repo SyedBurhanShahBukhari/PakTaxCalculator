@@ -67,20 +67,45 @@ class _BusinessTaxCalculatorState extends State<BusinessTaxCalculator> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Business Tax Calculator',
-          style: TextStyle(
+        backgroundColor: Color(0xFFF7F7F7),
+        elevation: 0,
+        automaticallyImplyLeading: false,
+
+        leading: Container(
+          margin: EdgeInsets.only(left: 15, top: 10, bottom: 5),
+          decoration: BoxDecoration(
             color: Colors.white,
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 5,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
+          child: IconButton(
+            icon: Icon(Icons.arrow_back_ios_rounded, color: Colors.green),
+            onPressed: () => Navigator.of(context).pop(),
           ),
         ),
-        backgroundColor: Colors.green,
-        iconTheme: IconThemeData(
-          color: Colors.white,
+        title: Center(
+          child: Padding(
+            padding: EdgeInsets.only(top: 12.0),
+            child: Text(
+              'Business Tax Calculator',
+              style: TextStyle(
+                fontFamily: 'Overpass',
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+          ),
         ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(30.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

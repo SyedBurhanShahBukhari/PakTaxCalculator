@@ -32,20 +32,17 @@ import 'package:paktaxcalculator_app/kpk_land_tax_calculator.dart';
 import 'package:paktaxcalculator_app/login_page.dart';
 import 'package:paktaxcalculator_app/sign_up.dart';
 
-///updating code and checking
-///again
-///again
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   try {
     if (kIsWeb) {
       await Firebase.initializeApp(
-        options: const FirebaseOptions(
+        options: FirebaseOptions(
           apiKey: "AIzaSyA7XHskh0Y_eaU7cjHTtnC_Iw35KAqvH_Q",
-          authDomain: "pakistantaxcalculator.firebase.com",
+          authDomain: "pakistantaxcalculator.firebaseapp.com",
           projectId: "pakistantaxcalculator",
-          storageBucket: "pakistantaxcalculator.apps pot.com",
+          storageBucket: "pakistantaxcalculator.appspot.com",
           messagingSenderId: "674833002497",
           appId: "1:674833002497:web:1256c14f4259d080f5d000",
           measurementId: "G-0X29NRMC6N",
@@ -56,11 +53,10 @@ void main() async {
     }
     runApp(PakTaxCalculatorApp());
   } catch (e) {
-    if (kDebugMode) {
-      print("Firebase initialization failed with error: $e");
-    }
+    print("Firebase initialization failed with error: $e");
   }
 }
+
 
 class PakTaxCalculatorApp extends StatefulWidget {
   @override
@@ -68,19 +64,17 @@ class PakTaxCalculatorApp extends StatefulWidget {
 }
 
 class _PakTaxCalculatorAppState extends State<PakTaxCalculatorApp> {
-  bool _isPremiumUser =
-      false; // This should come from your purchase checking service
+  bool _isPremiumUser = false;  // This should come from your purchase checking service
 
   @override
   void initState() {
     super.initState();
-    _checkIfUserIsPremium(); // Check if the user has purchased premium features
+    _checkIfUserIsPremium();  // Check if the user has purchased premium features
   }
 
   // Simulate checking the purchase status (you'd replace this with real logic)
   void _checkIfUserIsPremium() async {
-    bool isPremium = await PurchaseService()
-        .isUserPremium(); // This would check actual purchase status
+    bool isPremium = await PurchaseService().isUserPremium();  // This would check actual purchase status
     setState(() {
       _isPremiumUser = isPremium;
     });
@@ -104,43 +98,42 @@ class _PakTaxCalculatorAppState extends State<PakTaxCalculatorApp> {
         '/agriTaxCalculators': (context) => AgriTaxCalculatorsPage(),
 
         // Free calculators
-        '/agriTaxCalculatorIncomePunjab': (context) =>
-            PunjabIncomeTaxCalculator(),
-        '/agriTaxCalculatorIncomeSindh': (context) =>
-            SindhIncomeTaxCalculator(),
+        '/agriTaxCalculatorIncomePunjab': (context) => PunjabIncomeTaxCalculator(),
+        '/agriTaxCalculatorIncomeSindh': (context) => SindhIncomeTaxCalculator(),
         '/agriTaxCalculatorIncomeKpk': (context) => KPKIncomeTaxCalculator(),
-        '/agriTaxCalculatorIncomeBalochistan': (context) =>
-            BalochistanIncomeTaxCalculator(),
+        '/agriTaxCalculatorIncomeBalochistan': (context) => BalochistanIncomeTaxCalculator(),
         '/gainTaxCalculators': (context) => GainTaxCalculatorsPage(),
         '/gainSecurityTaxCalculators': (context) => GainSecurityTaxCalculator(),
         '/gainFundTaxCalculators': (context) => CapitalGainFundsTaxCalculator(),
-        '/gainPropertiesTaxCalculators': (context) =>
-            CapitalGainPropertiesTaxCalculator(),
-        '/WithholdingPropertiesTaxCalculators': (context) =>
-            WithholdingPropertiesTaxCalculator(),
+        '/gainPropertiesTaxCalculators': (context) => CapitalGainPropertiesTaxCalculator(),
+        '/WithholdingPropertiesTaxCalculators': (context) => WithholdingPropertiesTaxCalculator(),
         '/WithholdingTaxCalculators': (context) => WithholdingTaxCalculator(),
         '/incomeTaxCalculators': (context) => IncomeTaxCalculatorsPage(),
         '/salaryIncomeTaxCalculators': (context) => SalaryTaxCalculator(),
         '/businessIncomeTaxCalculators': (context) => BusinessTaxCalculator(),
-        '/freelancerIncomeTaxCalculators': (context) =>
-            FreelancerTaxCalculator(),
+        '/freelancerIncomeTaxCalculators': (context) => FreelancerTaxCalculator(),
         '/developerIncomeTaxCalculators': (context) => DeveloperTaxCalculator(),
         '/builderIncomeTaxCalculators': (context) => BuilderTaxCalculator(),
 
         // Premium calculators
-        '/agriTaxCalculatorLandPunjab': (context) =>
-            _isPremiumUser ? PunjabLandTaxCalculator() : _showPaywall(context),
-        '/agriTaxCalculatorLandSindh': (context) =>
-            _isPremiumUser ? SindhLandTaxCalculator() : _showPaywall(context),
-        '/agriTaxCalculatorLandKpk': (context) =>
-            _isPremiumUser ? KpkLandTaxCalculator() : _showPaywall(context),
+        '/agriTaxCalculatorLandPunjab': (context) => _isPremiumUser
+            ? PunjabLandTaxCalculator()
+            : _showPaywall(context),
+        '/agriTaxCalculatorLandSindh': (context) => _isPremiumUser
+            ? SindhLandTaxCalculator()
+            : _showPaywall(context),
+        '/agriTaxCalculatorLandKpk': (context) => _isPremiumUser
+            ? KpkLandTaxCalculator()
+            : _showPaywall(context),
         '/agriTaxCalculatorLandBalochistan': (context) => _isPremiumUser
             ? BalochistanLandTaxCalculator()
             : _showPaywall(context),
-        '/superIncomeTaxCalculators': (context) =>
-            _isPremiumUser ? SuperTaxCalculator() : _showPaywall(context),
-        '/companiesIncomeTaxCalculators': (context) =>
-            _isPremiumUser ? CompaniesTaxCalculator() : _showPaywall(context),
+        '/superIncomeTaxCalculators': (context) => _isPremiumUser
+            ? SuperTaxCalculator()
+            : _showPaywall(context),
+        '/companiesIncomeTaxCalculators': (context) => _isPremiumUser
+            ? CompaniesTaxCalculator()
+            : _showPaywall(context),
       },
     );
   }
@@ -170,7 +163,7 @@ class _PakTaxCalculatorAppState extends State<PakTaxCalculatorApp> {
             onPressed: () => Navigator.of(context).pop(),
           ),
         ),
-        title: const Center(
+        title: Center(
           child: Padding(
             padding: EdgeInsets.only(top: 12.0),
             child: Text(
@@ -192,10 +185,7 @@ class _PakTaxCalculatorAppState extends State<PakTaxCalculatorApp> {
             children: [
               Text(
                 'Premium Access Required',
-                style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green[800]),
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.green[800]),
               ),
               SizedBox(height: 20),
               Text(
@@ -205,14 +195,12 @@ class _PakTaxCalculatorAppState extends State<PakTaxCalculatorApp> {
               SizedBox(height: 30),
               ElevatedButton.icon(
                 onPressed: () {
-                  PurchaseService()
-                      .purchasePremiumCalculator(); // Ensure this method exists in your PurchaseService
+                  PurchaseService().purchasePremiumCalculator();  // Ensure this method exists in your PurchaseService
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green[700],
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                 ),
                 icon: Icon(Icons.lock_open, color: Colors.white),
                 label: Text(

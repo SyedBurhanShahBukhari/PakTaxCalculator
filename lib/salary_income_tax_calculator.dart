@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // Add this import for number formatting
-import 'package:flutter/services.dart'; // Add this import for input formatting
+import 'package:intl/intl.dart';
+import 'package:flutter/services.dart';
 
 class SalaryTaxCalculator extends StatefulWidget {
   @override
@@ -35,23 +35,57 @@ class _SalaryTaxCalculatorState extends State<SalaryTaxCalculator> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Salary Tax Calculator',
-          style: TextStyle(
-            color: Colors.white, // Change this to the color you prefer for the title text
+        backgroundColor: Color(0xFFF7F7F7),
+        elevation: 0,
+        automaticallyImplyLeading: false,
+
+        leading: Container(
+          margin: EdgeInsets.only(left: 15, top: 10, bottom: 5),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 5,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
+          child: IconButton(
+            icon: Icon(Icons.arrow_back_ios_rounded, color: Colors.green),
+            onPressed: () => Navigator.of(context).pop(),
           ),
         ),
-        backgroundColor: Colors.green, // Background color of the AppBar
-        iconTheme: IconThemeData(
-          color: Colors.white, // Change this to the color you prefer for the back icon
+        title: Center(
+          child: Padding(
+            padding: EdgeInsets.only(top: 12.0),
+            child: Text(
+              'Salary Tax Calculator',
+              style: TextStyle(
+                fontFamily: 'Overpass',
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+          ),
         ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(30.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Center(
+                child: Image.asset(
+                  'assets/calculate.png',
+                  width: 200, // Increase the width
+                  height: 200, // Optional: Set height to maintain aspect ratio
+                  fit: BoxFit.contain, // Adjust fit based on how you want it to scale
+                ),
+              ),
+              SizedBox(height: 30),
               Center(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 20.0),
@@ -60,47 +94,51 @@ class _SalaryTaxCalculatorState extends State<SalaryTaxCalculator> {
                     style: TextStyle(
                       fontSize: 36,
                       fontWeight: FontWeight.bold,
-                      color: Colors.green[900],
+                      color: Colors.black,
                       fontFamily: 'Overpass',
                     ),
                     textAlign: TextAlign.center,
                   ),
                 ),
               ),
+              SizedBox(height: 10),
               Center(
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
+                  padding: const EdgeInsets.only(top: 00.0),
                   child: Text(
                     'This is the latest salary tax calculator as per $_selectedYear budget presented by the government of Pakistan.',
                     style: TextStyle(
                       fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.green[900],
+                      // fontWeight: FontWeight.bold,
+                      color: Colors.grey[800],
                       fontFamily: 'Overpass',
                     ),
                     textAlign: TextAlign.center,
                   ),
                 ),
               ),
-
               SizedBox(height: 30),
               GestureDetector(
                 onTap: () => _showPeriodPicker(context),
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                  padding: EdgeInsets.symmetric(horizontal: 14.0, vertical: 12.0),
                   decoration: BoxDecoration(
-                    color: Colors.grey[200],
+                    color: Colors.grey[100],
                     borderRadius: BorderRadius.circular(12.0),
-                    border: Border.all(color: Colors.grey),
+                    border: Border.all(color: Colors.grey.shade300),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         _selectedPeriod == 'monthly' ? "Monthly" : "Yearly",
-                        style: TextStyle(fontSize: 18, color: Colors.green[900]),
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.green[900],
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                      Icon(Icons.arrow_drop_down, color: Colors.green),
+                      Icon(Icons.arrow_drop_down, color: Colors.grey),
                     ],
                   ),
                 ),
@@ -109,18 +147,18 @@ class _SalaryTaxCalculatorState extends State<SalaryTaxCalculator> {
               GestureDetector(
                 onTap: () => _showYearPicker(context),
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                  padding: EdgeInsets.symmetric(horizontal: 14.0, vertical: 12.0),
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(12.0),
-                    border: Border.all(color: Colors.grey),
+                    border: Border.all(color: Colors.grey.shade300),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         _selectedYear,
-                        style: TextStyle(fontSize: 18, color: Colors.green[900]),
+                        style: TextStyle(fontSize: 15, color: Colors.green[900]),
                       ),
                       Icon(Icons.arrow_drop_down, color: Colors.green),
                     ],
@@ -134,25 +172,33 @@ class _SalaryTaxCalculatorState extends State<SalaryTaxCalculator> {
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.0),
+                    borderSide: BorderSide(color: Colors.grey.shade300, width: 1.5), // Default border
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                    borderSide: BorderSide(color: Colors.grey.shade300, width: 1.5), // Enabled border color
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.green),
                     borderRadius: BorderRadius.circular(12.0),
+                    borderSide: BorderSide(color: Colors.green, width: 1.5), // Focused border
                   ),
+
                   labelText: _selectedPeriod == 'monthly' ? 'Enter Monthly Salary' : 'Enter Yearly Salary',
-                  labelStyle: TextStyle(color: Colors.green[900]),
+                  labelStyle: TextStyle(fontSize: 15,color: Colors.green[900]),
                   filled: true,
                   fillColor: Colors.grey[200],
                 ),
                 keyboardType: TextInputType.number,
                 inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.digitsOnly
+                  FilteringTextInputFormatter.digitsOnly,
+                  LengthLimitingTextInputFormatter(13),
                 ],
                 onChanged: (value) {
                   _calculateTax();
                 },
               ),
               SizedBox(height: 30),
+
               _buildResultTable(
                 title: 'MONTHLY',
                 income: _monthlySalary,
@@ -173,10 +219,11 @@ class _SalaryTaxCalculatorState extends State<SalaryTaxCalculator> {
     );
   }
 
+
   Widget _buildResultTable({required String title, required int income, required int tax, required int incomeAfterTax}) {
     return Card(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
+        borderRadius: BorderRadius.circular(12.0),
       ),
       child: Column(
         children: [
@@ -185,15 +232,15 @@ class _SalaryTaxCalculatorState extends State<SalaryTaxCalculator> {
             decoration: BoxDecoration(
               color: Colors.green,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(15.0),
-                topRight: Radius.circular(15.0),
+                topLeft: Radius.circular(12.0),
+                topRight: Radius.circular(12.0),
               ),
             ),
             child: Center(
               child: Text(
                 title,
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
@@ -238,11 +285,11 @@ class _SalaryTaxCalculatorState extends State<SalaryTaxCalculator> {
         children: [
           Text(
             title,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.green[900]),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.green[900]),
           ),
           Text(
             value,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.green[900]),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.green[900]),
           ),
         ],
       ),
@@ -255,7 +302,7 @@ class _SalaryTaxCalculatorState extends State<SalaryTaxCalculator> {
       builder: (BuildContext context) {
         return Column(
           mainAxisSize: MainAxisSize.min,
-          children: ['monthly', 'yearly'].map((String value) {
+          children: ['Monthly', 'Yearly'].map((String value) {
             return ListTile(
               title: Text(value),
               onTap: () {
@@ -278,31 +325,39 @@ class _SalaryTaxCalculatorState extends State<SalaryTaxCalculator> {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <String>[
-            '2024-2025',
-            '2023-2024',
-            '2022-2023',
-            '2021-2022',
-            '2020-2021',
-            '2019-2020',
-          ].map((String value) {
-            return ListTile(
-              title: Text(value),
-              onTap: () {
-                setState(() {
-                  _selectedYear = value;
-                  _calculateTax();
-                });
-                Navigator.pop(context);
-              },
-            );
-          }).toList(),
+        return SingleChildScrollView( // This will enable scrolling
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <String>[
+              '2024-2025',
+              '2023-2024',
+              '2022-2023',
+              '2021-2022',
+              '2020-2021',
+              '2019-2020',
+              '2018-2019',
+              '2017-2018',
+              '2016-2017',
+              '2015-2016',
+              '2014-2015',
+            ].map((String value) {
+              return ListTile(
+                title: Text(value),
+                onTap: () {
+                  setState(() {
+                    _selectedYear = value;
+                    _calculateTax();
+                  });
+                  Navigator.pop(context);
+                },
+              );
+            }).toList(),
+          ),
         );
       },
     );
   }
+
 
   void _calculateTax() {
     int salary = int.tryParse(
@@ -348,6 +403,21 @@ class _SalaryTaxCalculatorState extends State<SalaryTaxCalculator> {
         break;
       case '2019-2020':
         taxAmount = _calculateTax19to20(amount);
+        break;
+      case '2018-2019':
+        taxAmount = _calculateTax18to19(amount);
+        break;
+      case '2017-2018':
+        taxAmount = _calculateTax17to18(amount);
+        break;
+      case '2016-2017':
+        taxAmount = _calculateTax16to17(amount);
+        break;
+      case '2015-2016':
+        taxAmount = _calculateTax15to16(amount);
+        break;
+      case '2014-2015':
+        taxAmount = _calculateTax14to15(amount);
         break;
     }
 
@@ -536,4 +606,182 @@ class _SalaryTaxCalculatorState extends State<SalaryTaxCalculator> {
     }
     return taxAmount;
   }
+
+  int _calculateTax18to19(int amount) {
+    int taxAmount = 0;
+    if (amount > 400000 && amount <= 800000) {
+      taxAmount = 1000;
+    } else if (amount > 800000 && amount <= 1200000) {
+      taxAmount = 2000;
+    } else if (amount > 1200000 && amount <= 2500000) {
+      amount -= 1200000;
+      int taxAmount1 = (amount * 0.05).round();
+      int taxAmount2 = 2000;
+      taxAmount = taxAmount1 > taxAmount2 ? taxAmount1 : taxAmount2;
+    } else if (amount > 2500000 && amount <= 4000000) {
+      amount -= 2500000;
+      taxAmount = 65000 + (amount * 0.15).round();
+    } else if (amount > 4000000 && amount <= 8000000) {
+      amount -= 4000000;
+      taxAmount = 290000 + (amount * 0.2).round();
+    } else if (amount > 8000000) {
+      amount -= 8000000;
+      taxAmount = 1090000 + (amount * 0.25).round();
+    }
+    return taxAmount;
+  }
+
+  int _calculateTax17to18(int amount) {
+    int taxAmount = 0;
+    if (amount > 400000 && amount <= 500000) {
+      amount -= 400000;
+      taxAmount = (amount * 0.02).round();
+    } else if (amount > 500000 && amount <= 750000) {
+      amount -= 500000;
+      taxAmount = 2000 + (amount * 0.05).round();
+    } else if (amount > 750000 && amount <= 1400000) {
+      amount -= 750000;
+      taxAmount = 14500 + (amount * 0.1).round();
+    } else if (amount > 1400000 && amount <= 1500000) {
+      amount -= 1400000;
+      taxAmount = 79500 + (amount * 0.125).round();
+    } else if (amount > 1500000 && amount <= 1800000) {
+      amount -= 1500000;
+      taxAmount = 92000 + (amount * 0.15).round();
+    } else if (amount > 1800000 && amount < 2500000) {
+      amount -= 1800000;
+      taxAmount = 137000 + (amount * 0.175).round();
+    } else if (amount > 2500000 && amount < 3000000) {
+      amount -= 2500000;
+      taxAmount = 259500 + (amount * 0.2).round();
+    } else if (amount > 3000000 && amount < 3500000) {
+      amount -= 3000000;
+      taxAmount = 359500 + (amount * 0.225).round();
+    } else if (amount > 3500000 && amount < 4000000) {
+      amount -= 3500000;
+      taxAmount = 472000 + (amount * 0.25).round();
+    } else if (amount > 4000000 && amount < 7000000) {
+      amount -= 4000000;
+      taxAmount = 597000 + (amount * 0.275).round();
+    } else if (amount > 7000000) {
+      amount -= 7000000;
+      taxAmount = 1422000 + (amount * 0.3).round();
+    }
+    return taxAmount;
+  }
+
+  int _calculateTax16to17(int amount) {
+    int taxAmount = 0;
+    if (amount > 400000 && amount <= 500000) {
+      amount -= 400000;
+      taxAmount = (amount * 0.02).round();
+    } else if (amount > 500000 && amount <= 750000) {
+      amount -= 500000;
+      taxAmount = 2000 + (amount * 0.05).round();
+    } else if (amount > 750000 && amount <= 1400000) {
+      amount -= 750000;
+      taxAmount = 14500 + (amount * 0.1).round();
+    } else if (amount > 1400000 && amount <= 1500000) {
+      amount -= 1400000;
+      taxAmount = 79500 + (amount * 0.125).round();
+    } else if (amount > 1500000 && amount <= 1800000) {
+      amount -= 1500000;
+      taxAmount = 92000 + (amount * 0.15).round();
+    } else if (amount > 1800000 && amount < 2500000) {
+      amount -= 1800000;
+      taxAmount = 137000 + (amount * 0.175).round();
+    } else if (amount > 2500000 && amount < 3000000) {
+      amount -= 2500000;
+      taxAmount = 259500 + (amount * 0.2).round();
+    } else if (amount > 3000000 && amount < 3500000) {
+      amount -= 3000000;
+      taxAmount = 359500 + (amount * 0.225).round();
+    } else if (amount > 3500000 && amount < 4000000) {
+      amount -= 3500000;
+      taxAmount = 472000 + (amount * 0.25).round();
+    } else if (amount > 4000000 && amount < 7000000) {
+      amount -= 4000000;
+      taxAmount = 597000 + (amount * 0.275).round();
+    } else if (amount > 7000000) {
+      amount -= 7000000;
+      taxAmount = 1422000 + (amount * 0.3).round();
+    }
+    return taxAmount;
+  }
+
+  int _calculateTax15to16(int amount) {
+    int taxAmount = 0;
+    if (amount > 400000 && amount <= 500000) {
+      amount -= 400000;
+      taxAmount = (amount * 0.02).round();
+    } else if (amount > 500000 && amount <= 750000) {
+      amount -= 500000;
+      taxAmount = 2000 + (amount * 0.05).round();
+    } else if (amount > 750000 && amount <= 1400000) {
+      amount -= 750000;
+      taxAmount = 14500 + (amount * 0.1).round();
+    } else if (amount > 1400000 && amount <= 1500000) {
+      amount -= 1400000;
+      taxAmount = 79500 + (amount * 0.125).round();
+    } else if (amount > 1500000 && amount <= 1800000) {
+      amount -= 1500000;
+      taxAmount = 92000 + (amount * 0.15).round();
+    } else if (amount > 1800000 && amount < 2500000) {
+      amount -= 1800000;
+      taxAmount = 137000 + (amount * 0.175).round();
+    } else if (amount > 2500000 && amount < 3000000) {
+      amount -= 2500000;
+      taxAmount = 259500 + (amount * 0.2).round();
+    } else if (amount > 3000000 && amount < 3500000) {
+      amount -= 3000000;
+      taxAmount = 359500 + (amount * 0.225).round();
+    } else if (amount > 3500000 && amount < 4000000) {
+      amount -= 3500000;
+      taxAmount = 472000 + (amount * 0.25).round();
+    } else if (amount > 4000000 && amount < 7000000) {
+      amount -= 4000000;
+      taxAmount = 597000 + (amount * 0.275).round();
+    } else if (amount > 7000000) {
+      amount -= 7000000;
+      taxAmount = 1422000 + (amount * 0.3).round();
+    }
+    return taxAmount;
+  }
+
+  int _calculateTax14to15(int amount) {
+    int taxAmount = 0;
+    if (amount > 400000 && amount <= 750000) {
+      amount -= 400000;
+      taxAmount = (amount * 0.05).round();
+    } else if (amount > 750000 && amount <= 1400000) {
+      amount -= 750000;
+      taxAmount = 17500 + (amount * 0.1).round();
+    } else if (amount > 1400000 && amount <= 1500000) {
+      amount -= 1400000;
+      taxAmount = 82500 + (amount * 0.125).round();
+    } else if (amount > 1500000 && amount <= 1800000) {
+      amount -= 1500000;
+      taxAmount = 95000 + (amount * 0.15).round();
+    } else if (amount > 1800000 && amount <= 2500000) {
+      amount -= 1800000;
+      taxAmount = 140000 + (amount * 0.175).round();
+    } else if (amount > 2500000 && amount < 3000000) {
+      amount -= 2500000;
+      taxAmount = 262500 + (amount * 0.2).round();
+    } else if (amount > 3000000 && amount < 3500000) {
+      amount -= 3000000;
+      taxAmount = 362500 + (amount * 0.225).round();
+    } else if (amount > 3500000 && amount < 4000000) {
+      amount -= 3500000;
+      taxAmount = 475000 + (amount * 0.25).round();
+    } else if (amount > 4000000 && amount < 7000000) {
+      amount -= 4000000;
+      taxAmount = 600000 + (amount * 0.275).round();
+    } else if (amount > 7000000) {
+      amount -= 7000000;
+      taxAmount = 1425000 + (amount * 0.3).round();
+    }
+    return taxAmount;
+  }
+
 }
